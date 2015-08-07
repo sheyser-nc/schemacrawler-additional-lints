@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+
+<coverage line-rate="0.9375" branch-rate="1.0" lines-covered="45" lines-valid="48" branches-covered="18" branches-valid="18" complexity="1.6" version="2.0.3" timestamp="1438918076207">
+	<sources>
+		<source>--source</source>
+		<source>/media/barmi83/Data/projets/workspace/schemacrawler-additionnallints/src/main/java</source>
+	</sources>
+	<packages>
+		<package name="io.github.mbarre.schemacrawler.tool.linter" line-rate="0.9375" branch-rate="1.0" complexity="1.6">
+			<classes>
+				<class name="io.github.mbarre.schemacrawler.tool.linter.LinterTableNameNotInLowerCase" filename="io/github/mbarre/schemacrawler/tool/linter/LinterTableNameNotInLowerCase.java" line-rate="0.95" branch-rate="1.0" complexity="1.6666666666666667">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="7" branch="false"/>
+								<line number="22" hits="7" branch="false"/>
+								<line number="23" hits="7" branch="false"/>
+							</lines>
+						</method>
+						<method name="findColumnsWithUpperCase" signature="(Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="59" hits="3" branch="false"/>
+								<line number="60" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="61" hits="9" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="62" hits="1" branch="false"/>
+								<line number="64" hits="9" branch="false"/>
+								<line number="65" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="getDescription" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="28" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getSummary" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="34" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="isLowerCaseName" signature="(Ljava/lang/String;)Z" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="55" hits="12" branch="false"/>
+							</lines>
+						</method>
+						<method name="lint" signature="(Lschemacrawler/schema/Table;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="40" hits="3" branch="false"/>
+								<line number="42" hits="3" branch="false"/>
+								<line number="43" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="45" hits="1" branch="false"/>
+								<line number="48" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="49" hits="2" branch="false"/>
+								<line number="50" hits="2" branch="false"/>
+								<line number="51" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="7" branch="false"/>
+						<line number="22" hits="7" branch="false"/>
+						<line number="23" hits="7" branch="false"/>
+						<line number="28" hits="0" branch="false"/>
+						<line number="34" hits="2" branch="false"/>
+						<line number="40" hits="3" branch="false"/>
+						<line number="42" hits="3" branch="false"/>
+						<line number="43" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="45" hits="1" branch="false"/>
+						<line number="48" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="49" hits="2" branch="false"/>
+						<line number="50" hits="2" branch="false"/>
+						<line number="51" hits="3" branch="false"/>
+						<line number="55" hits="12" branch="false"/>
+						<line number="59" hits="3" branch="false"/>
+						<line number="60" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="61" hits="9" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="62" hits="1" branch="false"/>
+						<line number="64" hits="9" branch="false"/>
+						<line number="65" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="io.github.mbarre.schemacrawler.tool.linter.LinterTableWithNoPrimaryKey" filename="io/github/mbarre/schemacrawler/tool/linter/LinterTableWithNoPrimaryKey.java" line-rate="0.8888888888888888" branch-rate="1.0" complexity="1.25">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="17" hits="7" branch="false"/>
+								<line number="18" hits="7" branch="false"/>
+								<line number="19" hits="7" branch="false"/>
+							</lines>
+						</method>
+						<method name="getDescription" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="23" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getSummary" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="28" hits="1" branch="false"/>
+							</lines>
+						</method>
+						<method name="lint" signature="(Lschemacrawler/schema/Table;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="34" hits="3" branch="false"/>
+								<line number="36" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="37" hits="1" branch="false"/>
+								<line number="39" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="17" hits="7" branch="false"/>
+						<line number="18" hits="7" branch="false"/>
+						<line number="19" hits="7" branch="false"/>
+						<line number="23" hits="0" branch="false"/>
+						<line number="28" hits="1" branch="false"/>
+						<line number="34" hits="3" branch="false"/>
+						<line number="36" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="37" hits="1" branch="false"/>
+						<line number="39" hits="3" branch="false"/>
+					</lines>
+				</class>
+				<class name="io.github.mbarre.schemacrawler.tool.linter.LinterTableWithNoRemark" filename="io/github/mbarre/schemacrawler/tool/linter/LinterTableWithNoRemark.java" line-rate="0.9473684210526315" branch-rate="1.0" complexity="1.8">
+					<methods>
+						<method name="&lt;init&gt;" signature="()V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="21" hits="7" branch="false"/>
+								<line number="22" hits="7" branch="false"/>
+								<line number="23" hits="7" branch="false"/>
+							</lines>
+						</method>
+						<method name="findColumnsWithNoRemark" signature="(Ljava/util/List;)Ljava/util/List;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="53" hits="3" branch="false"/>
+								<line number="54" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="55" hits="9" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="56" hits="1" branch="false"/>
+								<line number="58" hits="9" branch="false"/>
+								<line number="59" hits="3" branch="false"/>
+							</lines>
+						</method>
+						<method name="getDescription" signature="()Ljava/lang/String;" line-rate="0.0" branch-rate="1.0">
+							<lines>
+								<line number="28" hits="0" branch="false"/>
+							</lines>
+						</method>
+						<method name="getSummary" signature="()Ljava/lang/String;" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="34" hits="2" branch="false"/>
+							</lines>
+						</method>
+						<method name="lint" signature="(Lschemacrawler/schema/Table;)V" line-rate="1.0" branch-rate="1.0">
+							<lines>
+								<line number="40" hits="3" branch="false"/>
+								<line number="42" hits="3" branch="false"/>
+								<line number="43" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="45" hits="1" branch="false"/>
+								<line number="47" hits="3" branch="true" condition-coverage="100 % (2/2)">
+									<conditions>
+										<condition number="0" type="jump" coverage="100 %"/>
+									</conditions>
+								</line>
+								<line number="48" hits="2" branch="false"/>
+								<line number="49" hits="2" branch="false"/>
+								<line number="50" hits="3" branch="false"/>
+							</lines>
+						</method>
+					</methods>
+					<lines>
+						<line number="21" hits="7" branch="false"/>
+						<line number="22" hits="7" branch="false"/>
+						<line number="23" hits="7" branch="false"/>
+						<line number="28" hits="0" branch="false"/>
+						<line number="34" hits="2" branch="false"/>
+						<line number="40" hits="3" branch="false"/>
+						<line number="42" hits="3" branch="false"/>
+						<line number="43" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="45" hits="1" branch="false"/>
+						<line number="47" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="48" hits="2" branch="false"/>
+						<line number="49" hits="2" branch="false"/>
+						<line number="50" hits="3" branch="false"/>
+						<line number="53" hits="3" branch="false"/>
+						<line number="54" hits="3" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="55" hits="9" branch="true" condition-coverage="100 % (2/2)">
+							<conditions>
+								<condition number="0" type="jump" coverage="100 %"/>
+							</conditions>
+						</line>
+						<line number="56" hits="1" branch="false"/>
+						<line number="58" hits="9" branch="false"/>
+						<line number="59" hits="3" branch="false"/>
+					</lines>
+				</class>
+			</classes>
+		</package>
+	</packages>
+</coverage>
