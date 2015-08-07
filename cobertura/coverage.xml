@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.9375" branch-rate="1.0" lines-covered="45" lines-valid="48" branches-covered="18" branches-valid="18" complexity="1.6" version="2.0.3" timestamp="1438918076207">
+<coverage line-rate="0.9375" branch-rate="1.0" lines-covered="45" lines-valid="48" branches-covered="18" branches-valid="18" complexity="1.6" version="2.0.3" timestamp="1438921189430">
 	<sources>
 		<source>--source</source>
 		<source>/media/barmi83/Data/projets/workspace/schemacrawler-additionnallints/src/main/java</source>
