@@ -8,8 +8,8 @@
     <language>en-us</language>
     <copyright>&#169;2015 github</copyright>
     <item>
-      <title>File: 3,
-             Errors: 147,
+      <title>File: 5,
+             Errors: 246,
              Warnings: 0,
              Infos: 0
       </title>
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterTableWithNoPrimaryKey.java">io/github/mbarre/schemacrawler/tool/linter/LinterTableWithNoPrimaryKey.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonTypeColumn.java</a>
                 </td>
                 <td>
                   0
@@ -52,7 +52,21 @@
                   0
                 </td>
                 <td>
-                  30
+                  66
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterColumnContentNotNormalized.java">io/github/mbarre/schemacrawler/tool/linter/LinterColumnContentNotNormalized.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  33
                 </td>
               </tr>
                           <tr>
@@ -67,6 +81,20 @@
                 </td>
                 <td>
                   61
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterTableWithNoPrimaryKey.java">io/github/mbarre/schemacrawler/tool/linter/LinterTableWithNoPrimaryKey.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  30
                 </td>
               </tr>
                       </tbody>
