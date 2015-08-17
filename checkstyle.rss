@@ -9,7 +9,7 @@
     <copyright>&#169;2015 github</copyright>
     <item>
       <title>File: 5,
-             Errors: 246,
+             Errors: 183,
              Warnings: 0,
              Infos: 0
       </title>
@@ -43,7 +43,7 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonTypeColumn.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.JSonUtils.java">io/github/mbarre/schemacrawler/utils/JSonUtils.java</a>
                 </td>
                 <td>
                   0
@@ -52,7 +52,7 @@
                   0
                 </td>
                 <td>
-                  66
+                  2
                 </td>
               </tr>
                           <tr>
@@ -66,7 +66,7 @@
                   0
                 </td>
                 <td>
-                  33
+                  34
                 </td>
               </tr>
                           <tr>
