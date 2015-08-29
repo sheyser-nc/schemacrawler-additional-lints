@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LinterXmlContent.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterXmlContent.java</span></div><h1>LinterXmlContent.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+import io.github.mbarre.schemacrawler.utils.LintUtils;
+import io.github.mbarre.schemacrawler.utils.XmlUtils;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Types;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.LintSeverity;
+import schemacrawler.tools.linter.LinterTableSql;
+
+/**
+ * Linter to check if non XML type is used whereas XML data is store in column
+ * @author mbarre
+ * @since 1.0.1
+ */
+public class LinterXmlContent extends LinterTableSql {
+	
+<span class="fc" id="L28">    private static final Logger LOGGER = Logger.getLogger(LinterXmlContent.class.getName());</span>
+
+
+<span class="fc" id="L31">	public LinterXmlContent () {</span>
+<span class="fc" id="L32">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L33">    }</span>
+
+    @Override
+    public String getDescription() {
+<span class="fc" id="L37">        return getSummary();</span>
+    }
+
+    @Override
+    public String getSummary() {
+<span class="fc" id="L42">        return &quot; should be XML type.&quot;;</span>
+    }
+    
+    @Override
+    protected void lint(final Table table, final Connection connection)
+            throws SchemaCrawlerException {
+
+<span class="fc" id="L49">        try (Statement stmt = connection.createStatement()){</span>
+            String sql;
+<span class="fc" id="L51">            List&lt;Column&gt; columns = table.getColumns();</span>
+<span class="fc bfc" id="L52" title="All 2 branches covered.">            for (Column column : columns) {</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">            	if(LintUtils.isSqlTypeTextBased(column.getColumnDataType().getJavaSqlType().getJavaSqlType())){</span>
+            		
+<span class="fc" id="L55">            		sql = &quot;select &quot; + column.getName() + &quot; from &quot; + table.getName() ;</span>
+<span class="fc" id="L56">                    LOGGER.log(Level.INFO, &quot;SQL : {0}&quot;, sql);</span>
+                    
+<span class="fc" id="L58">                    ResultSet rs = stmt.executeQuery(sql);</span>
+<span class="fc" id="L59">                    boolean found = false;</span>
+<span class="fc bfc" id="L60" title="All 4 branches covered.">                    while (rs.next() &amp;&amp; !found) {</span>
+<span class="fc" id="L61">                        String data = rs.getString(column.getName());</span>
+                        
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                        if(XmlUtils.isXmlContent(data)){</span>
+<span class="fc" id="L64">                            LOGGER.log(Level.INFO, &quot;Adding lint as data is XML but column type is not XML.&quot;);</span>
+<span class="fc" id="L65">                            addLint(table, getDescription(), column.getFullName());</span>
+<span class="fc" id="L66">                            found = true;</span>
+                        }
+<span class="fc" id="L68">                    }            		</span>
+<span class="fc" id="L69">            	}</span>
+<span class="pc bpc" id="L70" title="1 of 2 branches missed.">            	else if(column.getColumnDataType().getJavaSqlType().getJavaSqlType() == Types.CLOB){</span>
+            		//TODO voir comment gérer ce cas pour ne pas que ca explose !
+            	}
+<span class="fc" id="L73">            }</span>
+            
+<span class="pc bpc" id="L75" title="4 of 8 branches missed.">        }catch (SQLException ex) {</span>
+<span class="fc" id="L76">            LOGGER.severe(ex.getMessage());</span>
+<span class="fc" id="L77">        }</span>
+<span class="fc" id="L78">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

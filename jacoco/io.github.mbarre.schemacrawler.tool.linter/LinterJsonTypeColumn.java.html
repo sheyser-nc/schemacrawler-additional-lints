@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LinterJsonTypeColumn.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterJsonTypeColumn.java</span></div><h1>LinterJsonTypeColumn.java</h1><pre class="source lang-java linenums">/**
+ * 
+ */
+package io.github.mbarre.schemacrawler.tool.linter;
+
+import static java.util.Objects.requireNonNull;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.tools.lint.LintSeverity;
+import schemacrawler.tools.linter.LinterTableSql;
+
+/**
+ * Linter to check if JSON type is used instead of JSONB - PostgreSQL reserved lint
+ * @author mbarre
+ * @since 1.0.1
+ */
+public class LinterJsonTypeColumn extends LinterTableSql {
+<span class="fc" id="L26">	private static final Logger LOGGER = Logger.getLogger(LinterJsonTypeColumn.class.getName());</span>
+	
+<span class="fc" id="L28">	public LinterJsonTypeColumn() {</span>
+<span class="fc" id="L29">		setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L30">	}</span>
+
+	@Override
+	public String getDescription()
+	{
+<span class="fc" id="L35">		return getSummary();</span>
+	}
+
+	@Override
+	public String getSummary()
+	{
+<span class="fc" id="L41">		return &quot; \&quot;jsonb\&quot; type should be used instead of \&quot;json\&quot; to store JSON data.&quot;;</span>
+	}
+
+	@Override
+	protected void lint(final Table table, Connection connection)
+	{
+<span class="fc" id="L47">		requireNonNull(table, &quot;No table provided&quot;);</span>
+		
+		try {
+<span class="pc bpc" id="L50" title="1 of 2 branches missed.">			if(&quot;PostgreSQL&quot;.equalsIgnoreCase(connection.getMetaData().getDatabaseProductName()) &amp;&amp;</span>
+<span class="pc bpc" id="L51" title="1 of 2 branches missed.">					&quot;9.4&quot;.compareTo(connection.getMetaData().getDatabaseProductVersion()) &lt;= 0){</span>
+<span class="fc" id="L52">				List&lt;String&gt; names = findJsonTypeColumn(table.getColumns());</span>
+<span class="fc bfc" id="L53" title="All 2 branches covered.">				for (String name : names) {</span>
+<span class="fc" id="L54">					addLint(table, getDescription(), name);</span>
+<span class="fc" id="L55">				}</span>
+			}
+			
+<span class="nc" id="L58">		} catch (SQLException e) {</span>
+<span class="nc" id="L59">			LOGGER.log(Level.SEVERE, &quot;Unable to get database product name info. Lint will not be executed.&quot;);</span>
+<span class="fc" id="L60">		}</span>
+<span class="fc" id="L61">	}</span>
+
+	private List&lt;String&gt; findJsonTypeColumn(List&lt;Column&gt; columns){
+<span class="fc" id="L64">		List&lt;String&gt; names = new ArrayList&lt;String&gt;();</span>
+<span class="fc bfc" id="L65" title="All 2 branches covered.">		for (Column column : columns) {</span>
+<span class="fc bfc" id="L66" title="All 2 branches covered.">			if(&quot;json&quot;.equalsIgnoreCase(column.getColumnDataType().getDatabaseSpecificTypeName())){</span>
+<span class="fc" id="L67">				names.add(column.getName());</span>
+<span class="fc" id="L68">				 LOGGER.log(Level.INFO, column.getFullName() + &quot; is json type.&quot;);</span>
+			}
+<span class="fc" id="L70">		}</span>
+<span class="fc" id="L71">		return names;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

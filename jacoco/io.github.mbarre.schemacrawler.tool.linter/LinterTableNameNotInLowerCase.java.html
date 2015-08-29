@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>LinterTableNameNotInLowerCase.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterTableNameNotInLowerCase.java</span></div><h1>LinterTableNameNotInLowerCase.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+/**
+ * Check that objects (tables, columns) have name in lower case
+ * @author mbarre
+ */
+public class LinterTableNameNotInLowerCase extends BaseLinter 
+{
+
+<span class="fc" id="L21">	public LinterTableNameNotInLowerCase() {</span>
+<span class="fc" id="L22">		setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L23">	}</span>
+
+	@Override
+	public String getDescription()
+	{
+<span class="fc" id="L28">		return getSummary();</span>
+	}
+
+	@Override
+	public String getSummary()
+	{
+<span class="fc" id="L34">		return &quot; name should be in lower case&quot;;</span>
+	}
+
+	@Override
+	protected void lint(final Table table)
+	{
+<span class="fc" id="L40">		requireNonNull(table, &quot;No table provided&quot;);</span>
+<span class="fc" id="L41">		List&lt;String&gt; names = findColumnsWithUpperCase(table.getColumns());</span>
+<span class="fc bfc" id="L42" title="All 2 branches covered.">		if (!isLowerCaseName(table.getName()))</span>
+		{
+<span class="fc" id="L44">			names.add(0,table.getName());</span>
+		}
+				
+<span class="fc bfc" id="L47" title="All 2 branches covered.">		for (String name : names) {</span>
+<span class="fc" id="L48">			addLint(table, getDescription(), name);</span>
+<span class="fc" id="L49">		}</span>
+<span class="fc" id="L50">	}</span>
+
+	private boolean isLowerCaseName(final String name)
+	{
+<span class="fc" id="L54">		return name.toLowerCase().equals(name);</span>
+	}
+
+	private List&lt;String&gt; findColumnsWithUpperCase(List&lt;Column&gt; columns){
+<span class="fc" id="L58">		List&lt;String&gt; names = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">		for (Column column : columns) {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">			if(!isLowerCaseName(column.getName())){</span>
+<span class="fc" id="L61">				names.add(column.getName());</span>
+			}
+<span class="fc" id="L63">		}</span>
+<span class="fc" id="L64">		return names;</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.5.201505241946</span></div></body></html>

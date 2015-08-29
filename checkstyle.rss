@@ -8,8 +8,8 @@
     <language>en-us</language>
     <copyright>&#169;2015 github</copyright>
     <item>
-      <title>File: 5,
-             Errors: 183,
+      <title>File: 10,
+             Errors: 414,
              Warnings: 0,
              Infos: 0
       </title>
@@ -43,6 +43,48 @@
               </tr>
                           <tr>
                 <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterXmlContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterXmlContent.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  43
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonTypeColumn.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  74
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.LintUtils.java">io/github/mbarre/schemacrawler/utils/LintUtils.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  18
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.JSonUtils.java">io/github/mbarre/schemacrawler/utils/JSonUtils.java</a>
                 </td>
                 <td>
@@ -52,7 +94,7 @@
                   0
                 </td>
                 <td>
-                  2
+                  30
                 </td>
               </tr>
                           <tr>
@@ -67,6 +109,20 @@
                 </td>
                 <td>
                   34
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonContent.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  35
                 </td>
               </tr>
                           <tr>
@@ -95,6 +151,20 @@
                 </td>
                 <td>
                   30
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.XmlUtils.java">io/github/mbarre/schemacrawler/utils/XmlUtils.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  33
                 </td>
               </tr>
                       </tbody>
