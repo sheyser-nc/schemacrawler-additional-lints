@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
 
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
 <rss version="0.91">
   <channel>
     <title>Additional SchemaCrawler Lints - Checkstyle report</title>
     <link>https://github.com/mbarre/schemacrawler-additionnallints</link>
     <description>Additional SchemaCrawler Lints - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2015 github</copyright>
+    <copyright>&#169;2015 - 2016 github</copyright>
     <item>
-      <title>File: 10,
-             Errors: 414,
+      <title>File: 13,
+             Errors: 495,
              Warnings: 0,
              Infos: 0
       </title>
@@ -29,7 +46,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterTableWithNoRemark.java">io/github/mbarre/schemacrawler/tool/linter/LinterTableWithNoRemark.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterBooleanContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterBooleanContent.java</a>
                 </td>
                 <td>
                   0
@@ -38,21 +55,7 @@
                   0
                 </td>
                 <td>
-                  56
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterXmlContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterXmlContent.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  43
+                  72
                 </td>
               </tr>
                           <tr>
@@ -66,7 +69,63 @@
                   0
                 </td>
                 <td>
-                  74
+                  38
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterPrimaryKeyNotIntegerLikeType.java">io/github/mbarre/schemacrawler/tool/linter/LinterPrimaryKeyNotIntegerLikeType.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  25
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterColumnSize.java">io/github/mbarre/schemacrawler/tool/linter/LinterColumnSize.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  65
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterBlobTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterBlobTypeColumn.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  22
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterXmlContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterXmlContent.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  48
                 </td>
               </tr>
                           <tr>
@@ -94,7 +153,7 @@
                   0
                 </td>
                 <td>
-                  30
+                  20
                 </td>
               </tr>
                           <tr>
@@ -108,7 +167,7 @@
                   0
                 </td>
                 <td>
-                  34
+                  63
                 </td>
               </tr>
                           <tr>
@@ -122,7 +181,7 @@
                   0
                 </td>
                 <td>
-                  35
+                  37
                 </td>
               </tr>
                           <tr>
@@ -136,12 +195,12 @@
                   0
                 </td>
                 <td>
-                  61
+                  36
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterTableWithNoPrimaryKey.java">io/github/mbarre/schemacrawler/tool/linter/LinterTableWithNoPrimaryKey.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterForeignKeyMismatchLazy.java">io/github/mbarre/schemacrawler/tool/linter/LinterForeignKeyMismatchLazy.java</a>
                 </td>
                 <td>
                   0
@@ -150,7 +209,7 @@
                   0
                 </td>
                 <td>
-                  30
+                  29
                 </td>
               </tr>
                           <tr>
@@ -164,7 +223,7 @@
                   0
                 </td>
                 <td>
-                  33
+                  22
                 </td>
               </tr>
                       </tbody>
