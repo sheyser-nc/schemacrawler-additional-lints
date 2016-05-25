@@ -88,19 +88,19 @@
 <a class="jxr_linenumber" name="L80" href="#L80">80</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLint_getDescription () <strong class="jxr_keyword">throws</strong> SchemaCrawlerException{
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>          <strong class="jxr_keyword">final</strong> LinterRegistry registry = <strong class="jxr_keyword">new</strong> LinterRegistry();
 <a class="jxr_linenumber" name="L82" href="#L82">82</a>          LinterColumnSize linter = (LinterColumnSize)registry.newLinter(LinterColumnSize.<strong class="jxr_keyword">class</strong>.getName());
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>          Assert.assertEquals(<span class="jxr_string">"column is oversized regarding its content."</span>, linter.getDescription());
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>          Assert.assertEquals(<span class="jxr_string">"Column is oversized regarding its content"</span>, linter.getDescription());
 <a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
 <a class="jxr_linenumber" name="L85" href="#L85">85</a>      
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      @Test
 <a class="jxr_linenumber" name="L87" href="#L87">87</a>      <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">void</strong> testLint_getSummary () <strong class="jxr_keyword">throws</strong> SchemaCrawlerException{
 <a class="jxr_linenumber" name="L88" href="#L88">88</a>          <strong class="jxr_keyword">final</strong> LinterRegistry registry = <strong class="jxr_keyword">new</strong> LinterRegistry();
 <a class="jxr_linenumber" name="L89" href="#L89">89</a>          LinterColumnSize linter = (LinterColumnSize)registry.newLinter(LinterColumnSize.<strong class="jxr_keyword">class</strong>.getName());
-<a class="jxr_linenumber" name="L90" href="#L90">90</a>          Assert.assertEquals(linter.getSummary(), linter.getDescription());
+<a class="jxr_linenumber" name="L90" href="#L90">90</a>          Assert.assertEquals(<span class="jxr_string">"oversized column"</span>, linter.getSummary());
 <a class="jxr_linenumber" name="L91" href="#L91">91</a>      }
 <a class="jxr_linenumber" name="L92" href="#L92">92</a>      
 <a class="jxr_linenumber" name="L93" href="#L93">93</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2015&#x2013;2016 <a href="https://github.com/mbarre/schemacrawler-additionnallints">github</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2015&#x2013;2016 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
 </body>
 </html>

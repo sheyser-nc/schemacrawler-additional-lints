@@ -20,19 +20,19 @@ under the License.
 <rss version="0.91">
   <channel>
     <title>Additional SchemaCrawler Lints - Checkstyle report</title>
-    <link>https://github.com/mbarre/schemacrawler-additionnallints</link>
+    <link>https://github.com/mbarre/schemacrawler-additional-lints</link>
     <description>Additional SchemaCrawler Lints - Checkstyle report</description>
     <language>en-us</language>
     <copyright>&#169;2015 - 2016 github</copyright>
     <item>
       <title>File: 13,
-             Errors: 495,
+             Errors: 513,
              Warnings: 0,
              Infos: 0
       </title>
-            <link>https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html</link>
+            <link>https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html</link>
       <description>
-        <p>Click <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html">here</a> for the full Checkstyle report.</p>
+        <p>Click <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html">here</a> for the full Checkstyle report.</p>
 
         <table summary="Files" boder="1">
           <thead>
@@ -46,7 +46,7 @@ under the License.
           <tbody>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterBooleanContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterBooleanContent.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterBooleanContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterBooleanContent.java</a>
                 </td>
                 <td>
                   0
@@ -55,12 +55,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  72
+                  82
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonTypeColumn.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonTypeColumn.java</a>
                 </td>
                 <td>
                   0
@@ -74,7 +74,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterPrimaryKeyNotIntegerLikeType.java">io/github/mbarre/schemacrawler/tool/linter/LinterPrimaryKeyNotIntegerLikeType.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterPrimaryKeyNotIntegerLikeType.java">io/github/mbarre/schemacrawler/tool/linter/LinterPrimaryKeyNotIntegerLikeType.java</a>
                 </td>
                 <td>
                   0
@@ -83,12 +83,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  25
+                  24
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterColumnSize.java">io/github/mbarre/schemacrawler/tool/linter/LinterColumnSize.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterColumnSize.java">io/github/mbarre/schemacrawler/tool/linter/LinterColumnSize.java</a>
                 </td>
                 <td>
                   0
@@ -102,7 +102,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterBlobTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterBlobTypeColumn.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterBlobTypeColumn.java">io/github/mbarre/schemacrawler/tool/linter/LinterBlobTypeColumn.java</a>
                 </td>
                 <td>
                   0
@@ -116,7 +116,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterXmlContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterXmlContent.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterXmlContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterXmlContent.java</a>
                 </td>
                 <td>
                   0
@@ -130,7 +130,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.LintUtils.java">io/github/mbarre/schemacrawler/utils/LintUtils.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.utils.LintUtils.java">io/github/mbarre/schemacrawler/utils/LintUtils.java</a>
                 </td>
                 <td>
                   0
@@ -144,7 +144,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.JSonUtils.java">io/github/mbarre/schemacrawler/utils/JSonUtils.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.utils.JSonUtils.java">io/github/mbarre/schemacrawler/utils/JSonUtils.java</a>
                 </td>
                 <td>
                   0
@@ -158,7 +158,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterColumnContentNotNormalized.java">io/github/mbarre/schemacrawler/tool/linter/LinterColumnContentNotNormalized.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterColumnContentNotNormalized.java">io/github/mbarre/schemacrawler/tool/linter/LinterColumnContentNotNormalized.java</a>
                 </td>
                 <td>
                   0
@@ -172,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonContent.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterJsonContent.java">io/github/mbarre/schemacrawler/tool/linter/LinterJsonContent.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterTableNameNotInLowerCase.java">io/github/mbarre/schemacrawler/tool/linter/LinterTableNameNotInLowerCase.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterTableNameNotInLowerCase.java">io/github/mbarre/schemacrawler/tool/linter/LinterTableNameNotInLowerCase.java</a>
                 </td>
                 <td>
                   0
@@ -195,12 +195,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  36
+                  35
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterForeignKeyMismatchLazy.java">io/github/mbarre/schemacrawler/tool/linter/LinterForeignKeyMismatchLazy.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterForeignKeyMismatchLazy.java">io/github/mbarre/schemacrawler/tool/linter/LinterForeignKeyMismatchLazy.java</a>
                 </td>
                 <td>
                   0
@@ -209,12 +209,12 @@ under the License.
                   0
                 </td>
                 <td>
-                  29
+                  39
                 </td>
               </tr>
                           <tr>
                 <td>
-                  <a href="https://github.com/mbarre/schemacrawler-additionnallints/checkstyle.html#io.github.mbarre.schemacrawler.utils.XmlUtils.java">io/github/mbarre/schemacrawler/utils/XmlUtils.java</a>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.utils.XmlUtils.java">io/github/mbarre/schemacrawler/utils/XmlUtils.java</a>
                 </td>
                 <td>
                   0
