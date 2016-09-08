@@ -26,12 +26,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.Types;
-import java.util.Map;
-import schemacrawler.schema.ColumnDataType;
-import schemacrawler.schema.JavaSqlType;
-import schemacrawler.schema.NamedObject;
-import schemacrawler.schema.Schema;
-import schemacrawler.schema.SearchableType;
 
 /**
  *
@@ -39,13 +33,6 @@ import schemacrawler.schema.SearchableType;
  */
 public class LintUtilsTest {
     
-    public LintUtilsTest() {
-        LintUtils test = new LintUtils();
-        Assert.assertTrue(true);
-    }
-    
-
-
     /**
      * Test of isSqlTypeTextBased method, of class LintUtils.
      */

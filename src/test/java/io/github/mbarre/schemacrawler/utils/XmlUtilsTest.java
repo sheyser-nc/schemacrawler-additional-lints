@@ -33,10 +33,6 @@ import org.junit.Test;
 public class XmlUtilsTest {
     
     
-    public XmlUtilsTest(){
-        XmlUtils test = new XmlUtils();
-        Assert.assertTrue(true);
-    }
     @Test
     public void testUtils_success() throws Exception {
         

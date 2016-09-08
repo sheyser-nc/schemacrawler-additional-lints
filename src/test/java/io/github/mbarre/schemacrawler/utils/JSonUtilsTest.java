@@ -31,11 +31,7 @@ import org.junit.Test;
  * @since
  */
 public class JSonUtilsTest {
-    
-    public JSonUtilsTest(){
-        JSonUtils test = new JSonUtils();
-        Assert.assertTrue(true);
-    }
+
     @Test
     public void testUtils_success() throws Exception{
         
