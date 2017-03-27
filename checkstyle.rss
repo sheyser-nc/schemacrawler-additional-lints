@@ -25,8 +25,8 @@ under the License.
     <language>en-us</language>
     <copyright>&#169;2015 - 2017 github</copyright>
     <item>
-      <title>File: 15,
-             Errors: 580,
+      <title>File: 16,
+             Errors: 654,
              Warnings: 0,
              Infos: 0
       </title>
@@ -168,6 +168,20 @@ under the License.
                 </td>
                 <td>
                   17
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="https://github.com/mbarre/schemacrawler-additional-lints/checkstyle.html#io.github.mbarre.schemacrawler.tool.linter.LinterCompressBlob.java">io/github/mbarre/schemacrawler/tool/linter/LinterCompressBlob.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  74
                 </td>
               </tr>
                           <tr>
