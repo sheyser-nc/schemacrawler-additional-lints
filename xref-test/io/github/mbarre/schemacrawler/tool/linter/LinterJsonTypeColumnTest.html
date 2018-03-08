@@ -50,7 +50,7 @@
 <a class="jxr_linenumber" name="L42" href="#L42">42</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/tool/linter/LinterJsonTypeColumnTest.html">LinterJsonTypeColumnTest</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/tool/linter/BaseLintTest.html">BaseLintTest</a> {
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>      
-<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHANGE_LOG_JSON_CHECK = <span class="jxr_string">"src/test/db/liquibase/jsonbCheck/db.changelog.xml"</span>;
+<a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHANGE_LOG_JSON_CHECK = <span class="jxr_string">"src/test/db/liquibase/LinterJsonTypeColumn/db.changelog.xml"</span>;
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/test/utils/PostgreSqlDatabase.html">PostgreSqlDatabase</a> database;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">boolean</strong> jsonbSupport = false;
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>      
@@ -81,20 +81,21 @@
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>              Connection connection = DriverManager.getConnection(PostgreSqlDatabase.CONNECTION_STRING,
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>                      PostgreSqlDatabase.USER_NAME, database.getPostgresPassword());
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>              
-<a class="jxr_linenumber" name="L76" href="#L76">76</a>              List&lt;LintWrapper&gt; lints = executeToJsonAndConvertToLintList(options, connection);
+<a class="jxr_linenumber" name="L76" href="#L76">76</a>              List&lt;LintWrapper&gt; lints = executeToJsonAndConvertToLintList(LinterJsonTypeColumn.<strong class="jxr_keyword">class</strong>.getSimpleName(), options, connection);
 <a class="jxr_linenumber" name="L77" href="#L77">77</a>              
 <a class="jxr_linenumber" name="L78" href="#L78">78</a>              Assert.assertEquals(1,lints.size());
-<a class="jxr_linenumber" name="L79" href="#L79">79</a>              Assert.assertEquals(LinterJsonTypeColumn.<strong class="jxr_keyword">class</strong>.getName(), lints.get(0).getId());
-<a class="jxr_linenumber" name="L80" href="#L80">80</a>              Assert.assertEquals(<span class="jxr_string">"content_json"</span>, lints.get(0).getValue());
-<a class="jxr_linenumber" name="L81" href="#L81">81</a>              Assert.assertEquals(<span class="jxr_string">"\&quot;JSONB\&quot; type should be used instead of \&quot;JSON\&quot; to store JSON data"</span>, lints.get(0).getDescription());
-<a class="jxr_linenumber" name="L82" href="#L82">82</a>              Assert.assertEquals(<span class="jxr_string">"high"</span>, lints.get(0).getSeverity());
-<a class="jxr_linenumber" name="L83" href="#L83">83</a>          }
-<a class="jxr_linenumber" name="L84" href="#L84">84</a>      }
-<a class="jxr_linenumber" name="L85" href="#L85">85</a>      
+<a class="jxr_linenumber" name="L79" href="#L79">79</a>              <strong class="jxr_keyword">int</strong> index = 0;
+<a class="jxr_linenumber" name="L80" href="#L80">80</a>              Assert.assertEquals(LinterJsonTypeColumn.<strong class="jxr_keyword">class</strong>.getName(), lints.get(index).getId());
+<a class="jxr_linenumber" name="L81" href="#L81">81</a>              Assert.assertEquals(<span class="jxr_string">"content_json"</span>, lints.get(index).getValue());
+<a class="jxr_linenumber" name="L82" href="#L82">82</a>              Assert.assertEquals(<span class="jxr_string">"\&quot;JSONB\&quot; type should be used instead of \&quot;JSON\&quot; to store JSON data"</span>, lints.get(index).getDescription());
+<a class="jxr_linenumber" name="L83" href="#L83">83</a>              Assert.assertEquals(<span class="jxr_string">"high"</span>, lints.get(index).getSeverity());
+<a class="jxr_linenumber" name="L84" href="#L84">84</a>          }
+<a class="jxr_linenumber" name="L85" href="#L85">85</a>      }
 <a class="jxr_linenumber" name="L86" href="#L86">86</a>      
-<a class="jxr_linenumber" name="L87" href="#L87">87</a>  }
+<a class="jxr_linenumber" name="L87" href="#L87">87</a>      
+<a class="jxr_linenumber" name="L88" href="#L88">88</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2015&#x2013;2017 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2015&#x2013;2018 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
 </body>
 </html>

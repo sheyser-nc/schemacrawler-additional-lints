@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterNoSpaceInNames.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterNoSpaceInNames.java</span></div><h1>LinterNoSpaceInNames.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*-
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2018 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import io.github.mbarre.schemacrawler.utils.JSonUtils;
+import io.github.mbarre.schemacrawler.utils.LintUtils;
+import org.apache.commons.lang3.StringUtils;
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+
+public class LinterNoSpaceInNames extends BaseLinter {
+
+
+    /**
+     * The lint that test if the table and column names contain spaces
+     */
+<span class="fc" id="L47">    public LinterNoSpaceInNames() {</span>
+<span class="fc" id="L48">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L49">    }</span>
+
+    /**
+     * Get the lint description
+     * @return lint description
+     */
+    @Override
+    public String getDescription()
+    {
+<span class="fc" id="L58">        return getSummary();</span>
+    }
+
+
+    /**
+     * The lint that does the job
+     * @param table table
+     * @param connection connection
+     */
+    @Override
+    protected void lint(Table table, Connection connection) throws SchemaCrawlerException {
+        String sql;
+<span class="fc" id="L70">        List&lt;Column&gt; columns = getColumns(table);</span>
+        String columnName;
+<span class="fc" id="L72">        String tableName = table.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="pc bpc" id="L73" title="1 of 2 branches missed.">        if(tableName.contains(&quot; &quot;)) {</span>
+<span class="fc" id="L74">            addLint(table, getDescription(), table.getFullName());</span>
+        }
+
+<span class="fc bfc" id="L77" title="All 2 branches covered.">        for (Column column : columns) {</span>
+<span class="fc bfc" id="L78" title="All 2 branches covered.">            if(column.getName().contains(&quot; &quot;))</span>
+<span class="fc" id="L79">                addLint(table, getDescription(), column.getFullName());</span>
+<span class="fc" id="L80">        }</span>
+<span class="fc" id="L81">    }</span>
+
+
+    /**
+     * Get the summary
+     * @return the summary
+     */
+    @Override
+    public String getSummary() {
+<span class="fc" id="L90">        return &quot;Space should not be used in table or column names&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

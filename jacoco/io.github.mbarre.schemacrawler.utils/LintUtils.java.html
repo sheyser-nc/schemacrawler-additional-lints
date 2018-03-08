@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LintUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.utils</a> &gt; <span class="el_source">LintUtils.java</span></div><h1>LintUtils.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.utils;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import schemacrawler.schema.ColumnDataType;
+
+import java.sql.Types;
+
+/**
+ *
+ * @author salad74
+ */
+public class LintUtils {
+
+<span class="nc" id="L35">	private LintUtils(){</span>
+<span class="nc" id="L36">		throw new IllegalAccessError(&quot;Utility class.&quot;);</span>
+	}
+	/**
+	 * Tells wether a column is text based or not.
+	 * @param javaSqlType the javaSqlType
+	 * @return is the sqlType is test based or not
+	 */
+	public static final boolean isSqlTypeTextBased(int javaSqlType) {
+<span class="fc bfc" id="L44" title="All 12 branches covered.">		return (javaSqlType == Types.NVARCHAR)</span>
+				|| (javaSqlType == Types.LONGNVARCHAR)
+				|| (javaSqlType == Types.LONGVARCHAR)
+				|| (javaSqlType == Types.CHAR)
+				|| (javaSqlType == Types.NCHAR)
+				|| (javaSqlType == Types.VARCHAR);
+	}
+
+	/**
+	 * Tells wether a column is numeric based or not.
+	 * @param javaSqlType the javaSqlType
+	 * @return is the sqlType is numeric based or not
+	 */
+	public static final boolean isSqlTypeNumericBased(int javaSqlType) {
+<span class="fc bfc" id="L58" title="All 18 branches covered.">		return (javaSqlType == Types.BIGINT)</span>
+				|| (javaSqlType == Types.DECIMAL)
+				|| (javaSqlType == Types.FLOAT)
+				|| (javaSqlType == Types.DOUBLE)
+				|| (javaSqlType == Types.INTEGER)
+				|| (javaSqlType == Types.NUMERIC)
+                                || (javaSqlType == Types.SMALLINT)
+                                || (javaSqlType == Types.REAL)
+                                || (javaSqlType == Types.TINYINT);
+	}
+
+        /**
+	 * Tells wether a column is integer like type or not.
+	 * @param javaSqlType the javaSqlType
+	 * @return is the sqlType is numeric based or not
+	 */
+	public static final boolean isSqlTypeIntegerBased(int javaSqlType) {
+<span class="fc bfc" id="L75" title="All 8 branches covered.">		return (javaSqlType == Types.BIGINT)</span>
+				|| (javaSqlType == Types.INTEGER)
+                                || (javaSqlType == Types.SMALLINT)
+                                || (javaSqlType == Types.TINYINT);
+	}
+        
+         /**
+	 * Tells wether a column is binary like type or not.
+	 * @param javaSqlType the javaSqlType
+	 * @return is the sqlType is binary based or not
+	 */
+	public static final boolean isSqlTypeBinayBased(int javaSqlType) {
+<span class="fc bfc" id="L87" title="All 8 branches covered.">		return (javaSqlType == Types.BINARY) </span>
+                        || (javaSqlType == Types.BLOB)
+                        || (javaSqlType == Types.VARBINARY)
+                        || (javaSqlType == Types.LONGVARBINARY);
+	}
+        
+        /**
+	 * Tells wether a column is large text like type or not.
+	 * @param dataType the dataType
+	 * @return is the sqlType is text based or not
+	 */
+	public static final boolean isSqlTypeLargeTextBased(ColumnDataType dataType) {
+<span class="pc bpc" id="L99" title="1 of 2 branches missed.">		return dataType.getJavaSqlType().getJavaSqlType() == Types.CLOB</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">                        || dataType.getJavaSqlType().getJavaSqlType() == Types.LONGVARCHAR</span>
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">                        || &quot;text&quot;.equalsIgnoreCase(dataType.getDatabaseSpecificTypeName());</span>
+	}
+
+	/**
+	 * Tells wether a column is date like type or not.
+	 * @param javaSqlType the dataType
+	 * @return is the sqlType is date based or not
+	 */
+	public static final boolean isSqlTypeDateBased(int javaSqlType) {
+<span class="fc bfc" id="L110" title="All 10 branches covered.">		return javaSqlType == Types.DATE</span>
+				|| javaSqlType == Types.TIME
+				|| javaSqlType == Types.TIME_WITH_TIMEZONE
+				|| javaSqlType == Types.TIMESTAMP
+				|| javaSqlType == Types.TIMESTAMP_WITH_TIMEZONE;
+	}
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

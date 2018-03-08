@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterBooleanContent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterBooleanContent.java</span></div><h1>LinterBooleanContent.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import io.github.mbarre.schemacrawler.utils.LintUtils;
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Linter to check if numeric column is used instead of boolean column
+ * Created by barmi83 on 28/12/15.
+ */
+public class LinterBooleanContent extends BaseLinter {
+<span class="fc" id="L45">    private static final Logger LOGGER = Logger.getLogger(LinterBooleanContent.class.getName());</span>
+    
+    /**
+     * The lint that parses and test numeric content
+     *
+     */
+    public LinterBooleanContent() {
+<span class="fc" id="L52">        super();</span>
+<span class="fc" id="L53">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L54">    }</span>
+    
+    /**
+     * Get the description
+     * @return the description
+     */
+    @Override
+    public String getDescription()
+    {
+<span class="fc" id="L63">        return getSummary();</span>
+    }
+    
+    /**
+     * Get lint Summary
+     * @return lint Summary
+     */
+    @Override
+    public String getSummary() {
+<span class="fc" id="L72">        return &quot;should be boolean type&quot;;</span>
+    }
+    
+    /**
+     * The lint that does the job
+     * @param table table
+     * @param connection connection
+     * @throws SchemaCrawlerException SchemaCrawlerException
+     */
+    @Override
+    protected void lint(final Table table, final Connection connection)
+            throws SchemaCrawlerException {
+        
+<span class="pc" id="L85">        try (Statement stmt = connection.createStatement()){</span>
+            
+<span class="fc" id="L87">            List&lt;Column&gt; columns = getColumns(table);</span>
+            int columnDataType;
+            int count;
+            int distinctCount;
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            for (Column column : columns) {</span>
+                //skip column if PK or FK
+<span class="pc bpc" id="L94" title="1 of 4 branches missed.">                if(!column.isPartOfPrimaryKey() &amp;&amp; !column.isPartOfForeignKey()) {</span>
+
+<span class="fc" id="L96">                    columnDataType = column.getColumnDataType().getJavaSqlType().getJavaSqlType();</span>
+<span class="pc bpc" id="L97" title="1 of 2 branches missed.">                    if (LintUtils.isSqlTypeNumericBased(columnDataType)) {</span>
+<span class="fc" id="L98">                        LOGGER.log(Level.INFO, &quot;Checking {0}...&quot;, column.getFullName());</span>
+<span class="fc" id="L99">                        count = getSelectCount(stmt, table, column);</span>
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">                        if (count &gt; 2) {</span>
+<span class="fc" id="L101">                            distinctCount = getSelectDistinctCount(stmt, table, column);</span>
+<span class="fc bfc" id="L102" title="All 2 branches covered.">                            if (distinctCount == 2) {</span>
+<span class="fc" id="L103">                                checkIfBooleanValuesAndLint(stmt, table, column);</span>
+                            }
+                        }
+                    }
+
+                }
+<span class="fc" id="L109">            }</span>
+<span class="pc bpc" id="L110" title="6 of 8 branches missed.">        }catch (SQLException ex) {</span>
+<span class="nc" id="L111">            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L112">            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L113">        }</span>
+<span class="fc" id="L114">    }</span>
+
+    private static int getSelectCount(Statement stmt, Table table, Column column) throws SchemaCrawlerException{
+<span class="fc" id="L117">        String tableName = table.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L118">        String columnName = column.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+
+<span class="fc" id="L120">        String sql = &quot;select count (\&quot;&quot; + columnName + &quot;\&quot;) as countRow from \&quot;&quot; + tableName +&quot;\&quot;&quot;;</span>
+<span class="fc" id="L121">        LOGGER.log(Level.CONFIG, &quot;SQL : {0}&quot;, sql);</span>
+
+<span class="fc" id="L123">        int count = 0;</span>
+<span class="pc" id="L124">        try(ResultSet rs = stmt.executeQuery(sql)){</span>
+<span class="pc bpc" id="L125" title="1 of 2 branches missed.">            if(rs.next()){</span>
+<span class="fc" id="L126">                count = rs.getInt(&quot;countRow&quot;);</span>
+            }
+<span class="pc bpc" id="L128" title="6 of 8 branches missed.">        }catch (SQLException ex) {</span>
+<span class="nc" id="L129">            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L130">            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L131">        }</span>
+<span class="fc" id="L132">        return count;</span>
+    }
+    
+    private static int getSelectDistinctCount(Statement stmt, Table table, Column column) throws SchemaCrawlerException{
+<span class="fc" id="L136">        String tableName = table.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L137">        String columnName = column.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+        
+<span class="fc" id="L139">        String sql = &quot;select count (distinct \&quot;&quot; + columnName + &quot;\&quot;) as countDistinctRow from \&quot;&quot; + tableName +&quot;\&quot;&quot;;</span>
+<span class="fc" id="L140">        LOGGER.log(Level.CONFIG, &quot;SQL : {0}&quot;, sql);</span>
+        
+<span class="fc" id="L142">        int count = 0;</span>
+<span class="pc" id="L143">        try(ResultSet rs = stmt.executeQuery(sql)){</span>
+<span class="pc bpc" id="L144" title="1 of 2 branches missed.">            if(rs.next()){</span>
+<span class="fc" id="L145">                count = rs.getInt(&quot;countDistinctRow&quot;);</span>
+            }
+<span class="pc bpc" id="L147" title="6 of 8 branches missed.">        }catch (SQLException ex) {</span>
+<span class="nc" id="L148">            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L149">            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L150">        }</span>
+<span class="fc" id="L151">        return count;</span>
+    }
+    
+    private void checkIfBooleanValuesAndLint(Statement stmt, final Table table, Column column) throws SchemaCrawlerException{
+<span class="fc" id="L155">        String tableName = table.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L156">        String columnName = column.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+        
+<span class="fc" id="L158">        String sql = &quot;select distinct \&quot;&quot; + columnName + &quot;\&quot; from \&quot;&quot; + tableName + &quot;\&quot;&quot; ;</span>
+<span class="fc" id="L159">        LOGGER.log(Level.CONFIG, &quot;SQL : {0}&quot;, sql);</span>
+        
+<span class="pc" id="L161">        try(ResultSet rs = stmt.executeQuery(sql)){</span>
+           
+<span class="fc" id="L163">            boolean trueFound = false;</span>
+<span class="fc" id="L164">            boolean falseFound = false;</span>
+<span class="fc bfc" id="L165" title="All 2 branches covered.">            while (rs.next()) {</span>
+<span class="pc bpc" id="L166" title="1 of 2 branches missed.">                if(rs.getObject(columnName) != null) {</span>
+<span class="fc" id="L167">                    int data = ((Number) rs.getObject(columnName)).intValue();</span>
+<span class="fc bfc" id="L168" title="All 2 branches covered.">                    if(data == 1)</span>
+<span class="fc" id="L169">                        trueFound = true;</span>
+<span class="pc bpc" id="L170" title="1 of 2 branches missed.">                    else if(data == 0)</span>
+<span class="fc" id="L171">                        falseFound = true;</span>
+<span class="fc" id="L172">                }</span>
+            }
+            
+<span class="pc bpc" id="L175" title="2 of 4 branches missed.">            if(trueFound &amp;&amp; falseFound){</span>
+<span class="fc" id="L176">                addLint(table, getDescription(), column.getFullName());</span>
+            }
+            
+<span class="pc bpc" id="L179" title="6 of 8 branches missed.">        }catch (SQLException ex) {</span>
+<span class="nc" id="L180">            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L181">            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L182">        }</span>
+<span class="fc" id="L183">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterTableNameNotInLowerCase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterTableNameNotInLowerCase.java</span></div><h1>LinterTableNameNotInLowerCase.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.Connection;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.util.Objects.requireNonNull;
+
+
+/**
+ * Check that objects (tables, columns) have name in lower case
+ * @author mbarre
+ */
+public class LinterTableNameNotInLowerCase extends BaseLinter
+{
+<span class="fc" id="L47">    private static final Logger LOGGER = Logger.getLogger(LinterTableNameNotInLowerCase.class.getName());</span>
+    
+    
+    /**
+     * The lint
+     */
+<span class="fc" id="L53">    public LinterTableNameNotInLowerCase() {</span>
+<span class="fc" id="L54">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L55">    }</span>
+    
+    /**
+     * Get the lint description
+     * @return lint description
+     */
+    @Override
+    public String getDescription()
+    {
+<span class="fc" id="L64">        return getSummary();</span>
+    }
+    
+    /**
+     * Get the lint summary
+     * @return the lint summary
+     */
+    @Override
+    public String getSummary()
+    {
+<span class="fc" id="L74">        return &quot;name should be in lower case&quot;;</span>
+    }
+    
+    /**
+     * The lint that does the job
+     * @param table table
+     * @param connection the connection
+     */
+    @Override
+    protected void lint(final Table table, final Connection connection)
+    {
+<span class="fc" id="L85">        requireNonNull(table, &quot;No table provided&quot;);</span>
+        
+<span class="fc" id="L87">        List&lt;String&gt; names = findColumnsWithUpperCase(getColumns(table));</span>
+<span class="fc bfc" id="L88" title="All 2 branches covered.">        if (!isLowerCaseName(table.getName()))</span>
+        {
+<span class="fc" id="L90">            names.add(0,table.getName());</span>
+        }
+        
+<span class="fc bfc" id="L93" title="All 2 branches covered.">        for (String name : names) {</span>
+<span class="fc" id="L94">            addLint(table, getDescription(), name);</span>
+<span class="fc" id="L95">        }</span>
+<span class="fc" id="L96">    }</span>
+    
+    private boolean isLowerCaseName(final String name)
+    {
+<span class="fc" id="L100">        return Objects.equals(name.toLowerCase(), name);</span>
+    }
+    
+    private List&lt;String&gt; findColumnsWithUpperCase(List&lt;Column&gt; columns){
+<span class="fc" id="L104">        List&lt;String&gt; names = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">        for (Column column : columns) {</span>
+<span class="fc" id="L106">            LOGGER.log(Level.INFO, &quot;Checking {0}...&quot;, column.getFullName());</span>
+<span class="fc bfc" id="L107" title="All 2 branches covered.">            if(!isLowerCaseName(column.getName())){</span>
+<span class="fc" id="L108">                names.add(column.getName());</span>
+            }
+<span class="fc" id="L110">        }</span>
+<span class="fc" id="L111">        return names;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

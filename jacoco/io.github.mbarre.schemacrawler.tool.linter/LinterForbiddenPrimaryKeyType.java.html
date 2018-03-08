@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterForbiddenPrimaryKeyType.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterForbiddenPrimaryKeyType.java</span></div><h1>LinterForbiddenPrimaryKeyType.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*-
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2018 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import io.github.mbarre.schemacrawler.utils.LintUtils;
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.Connection;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class LinterForbiddenPrimaryKeyType extends BaseLinter
+{
+<span class="fc" id="L39">    private static final Logger LOGGER = Logger.getLogger(LinterForbiddenPrimaryKeyType.class.getName());</span>
+
+    /**
+     * The lint that parses and test primary keys
+     *
+     */
+    public LinterForbiddenPrimaryKeyType() {
+<span class="fc" id="L46">        super();</span>
+<span class="fc" id="L47">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L48">    }</span>
+
+    @Override
+    protected void lint(Table table, Connection connection) throws SchemaCrawlerException {
+<span class="nc" id="L52">        List&lt;Column&gt; columns = getColumns(table);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        for (Column column : columns) {</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            if(column.isPartOfPrimaryKey()){</span>
+<span class="nc" id="L55">                LOGGER.log(Level.INFO, &quot;Checking {0}...&quot;, column.getFullName());</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">                if(LintUtils.isSqlTypeDateBased(column.getColumnDataType().getJavaSqlType().getJavaSqlType()))</span>
+<span class="nc" id="L57">                    addLint(table, getDescription(), column.getFullName());</span>
+            }
+<span class="nc" id="L59">        }</span>
+<span class="nc" id="L60">    }</span>
+
+    /**
+     * Get the lint description
+     * @return lint description
+     */
+    @Override
+    public String getDescription()
+    {
+<span class="nc" id="L69">        return getSummary();</span>
+    }
+
+    @Override
+    public String getSummary() {
+<span class="nc" id="L74">        return &quot;Current primary Key type is forbidden.&quot;;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

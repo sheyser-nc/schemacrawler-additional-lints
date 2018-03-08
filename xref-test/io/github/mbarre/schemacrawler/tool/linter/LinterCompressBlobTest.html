@@ -53,7 +53,7 @@
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="L46" href="#L46">46</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/tool/linter/LinterCompressBlobTest.html">LinterCompressBlobTest</a> <strong class="jxr_keyword">extends</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/tool/linter/BaseLintTest.html">BaseLintTest</a> {
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
-<a class="jxr_linenumber" name="L48" href="#L48">48</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHANGE_LOG_COMPRESS_BLOB_CHECK = <span class="jxr_string">"src/test/db/liquibase/compressBlob/db.changelog.xml"</span>;
+<a class="jxr_linenumber" name="L48" href="#L48">48</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHANGE_LOG_COMPRESS_BLOB_CHECK = <span class="jxr_string">"src/test/db/liquibase/LinterCompressBlob/db.changelog.xml"</span>;
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>  	<strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/test/utils/PostgreSqlDatabase.html">PostgreSqlDatabase</a> database;
 <a class="jxr_linenumber" name="L50" href="#L50">50</a>  
 <a class="jxr_linenumber" name="L51" href="#L51">51</a>  	@BeforeClass
@@ -74,11 +74,11 @@
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>  		Connection connection = DriverManager.getConnection(PostgreSqlDatabase.CONNECTION_STRING,
 <a class="jxr_linenumber" name="L67" href="#L67">67</a>  				PostgreSqlDatabase.USER_NAME, database.getPostgresPassword());
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>  
-<a class="jxr_linenumber" name="L69" href="#L69">69</a>  		List&lt;LintWrapper&gt; lints = executeToJsonAndConvertToLintList(options, connection);
+<a class="jxr_linenumber" name="L69" href="#L69">69</a>  		List&lt;LintWrapper&gt; lints = executeToJsonAndConvertToLintList(LinterCompressBlob.<strong class="jxr_keyword">class</strong>.getSimpleName(), options, connection);
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  		Assert.assertNotNull(lints);
 <a class="jxr_linenumber" name="L71" href="#L71">71</a>  		Assert.assertTrue(lints.stream().anyMatch(lint -&gt; Objects.equals(lint.getDescription(), <span class="jxr_string">"Blob should be compressed"</span>)));
-<a class="jxr_linenumber" name="L72" href="#L72">72</a>  		Assert.assertTrue(lints.stream().anyMatch(lint -&gt; Objects.equals(lint.getDescription(), <span class="jxr_string">"BLOB should not be used"</span>)));
-<a class="jxr_linenumber" name="L73" href="#L73">73</a>  		Assert.assertTrue(lints.stream().anyMatch(lint -&gt; Objects.equals(lint.getDescription(), <span class="jxr_string">"OID should be used instead of BYTEA"</span>)));
+<a class="jxr_linenumber" name="L72" href="#L72">72</a>  <em class="jxr_comment">//		Assert.assertTrue(lints.stream().anyMatch(lint -&gt; Objects.equals(lint.getDescription(), "BLOB should not be used")));</em>
+<a class="jxr_linenumber" name="L73" href="#L73">73</a>  <em class="jxr_comment">//		Assert.assertTrue(lints.stream().anyMatch(lint -&gt; Objects.equals(lint.getDescription(), "OID should be used instead of BYTEA")));</em>
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>  
 <a class="jxr_linenumber" name="L75" href="#L75">75</a>  	}
 <a class="jxr_linenumber" name="L76" href="#L76">76</a>  
@@ -89,6 +89,6 @@
 <a class="jxr_linenumber" name="L81" href="#L81">81</a>  }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2015&#x2013;2017 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2015&#x2013;2018 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
 </body>
 </html>

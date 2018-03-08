@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterJsonContent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterJsonContent.java</span></div><h1>LinterJsonContent.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import io.github.mbarre.schemacrawler.utils.JSonUtils;
+import io.github.mbarre.schemacrawler.utils.LintUtils;
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.Config;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.*;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Linter to check if non JSONB type is used whereas JSON data is store in column
+ * @author mbarre
+ * @since 1.0.1
+ */
+public class LinterJsonContent extends BaseLinter {
+
+<span class="fc" id="L46">    private static final Logger LOGGER = Logger.getLogger(LinterJsonContent.class.getName());</span>
+
+    public static final String SAMPLE_SIZE_PARAM = &quot;sampleSize&quot;;
+
+    private Integer sampleSize;
+
+    /**
+     * The lint that parses and test Json content
+     */
+<span class="fc" id="L55">    public LinterJsonContent () {</span>
+<span class="fc" id="L56">        sampleSize = 1000;</span>
+<span class="fc" id="L57">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L58">    }</span>
+
+    @Override
+    public void configure(Config config) {
+<span class="fc" id="L62">        sampleSize = config.getIntegerValue(SAMPLE_SIZE_PARAM, 1000);</span>
+<span class="fc" id="L63">    }</span>
+
+    /**
+     * Get lint descrption
+     * @return lint description
+     */
+    @Override
+    public String getDescription() {
+<span class="fc" id="L71">        return getSummary();</span>
+    }
+
+    /**
+     * Get lint Summary
+     * @return lint Summary
+     */
+    @Override
+    public String getSummary() {
+<span class="fc" id="L80">        return &quot;should be JSON or JSONB type&quot;;</span>
+    }
+
+    /**
+     * The lint that does the job
+     * @param table table
+     * @param connection connection
+     * @throws SchemaCrawlerException SchemaCrawlerException
+     */
+    @Override
+    protected void lint(final Table table, final Connection connection)
+            throws SchemaCrawlerException {
+
+<span class="pc" id="L93">        try (Statement stmt = connection.createStatement()){</span>
+<span class="pc bpc" id="L94" title="1 of 2 branches missed.">            if(&quot;PostgreSQL&quot;.equalsIgnoreCase(connection.getMetaData().getDatabaseProductName()) &amp;&amp;</span>
+<span class="pc bpc" id="L95" title="1 of 2 branches missed.">                    &quot;9.4&quot;.compareTo(connection.getMetaData().getDatabaseProductVersion()) &lt;= 0){</span>
+
+<span class="fc" id="L97">                LOGGER.log(Level.CONFIG, &quot;&lt;&quot;+SAMPLE_SIZE_PARAM+&quot;&gt; parameter set to {0}%&quot;, sampleSize);</span>
+
+                String sql;
+<span class="fc" id="L100">                List&lt;Column&gt; columns = getColumns(table);</span>
+                String columnName;
+<span class="fc" id="L102">                String tableName = table.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">                for (Column column : columns) {</span>
+<span class="fc bfc" id="L104" title="All 2 branches covered.">                    if(LintUtils.isSqlTypeTextBased(column.getColumnDataType().getJavaSqlType().getJavaSqlType())){</span>
+<span class="fc" id="L105">                        columnName = column.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L106">                        LOGGER.log(Level.INFO, &quot;Checking {0}...&quot;,columnName);</span>
+
+
+
+<span class="fc" id="L110">                        sql = &quot;select \&quot;&quot; + columnName + &quot;\&quot; from \&quot;&quot; + tableName +&quot;\&quot; ORDER BY random()&quot; ;</span>
+<span class="fc" id="L111">                        stmt.setMaxRows(sampleSize);</span>
+<span class="fc" id="L112">                        LOGGER.log(Level.CONFIG, &quot;SQL : {0}&quot;, sql);</span>
+
+<span class="pc" id="L114">                        try(ResultSet rs = stmt.executeQuery(sql)){</span>
+<span class="fc" id="L115">                            boolean found = false;</span>
+<span class="pc bpc" id="L116" title="1 of 4 branches missed.">                            while (rs.next() &amp;&amp; !found) {</span>
+<span class="fc" id="L117">                                String data = rs.getString(columnName);</span>
+
+<span class="fc bfc" id="L119" title="All 2 branches covered.">                                if(JSonUtils.isJsonContent(data)){</span>
+<span class="fc" id="L120">                                    addLint(table, getDescription(), column.getFullName());</span>
+<span class="fc" id="L121">                                    found = true;</span>
+                                }
+<span class="fc" id="L123">                            }</span>
+<span class="pc bpc" id="L124" title="6 of 8 branches missed.">                        }catch (SQLException ex) {</span>
+<span class="nc" id="L125">                            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L126">                            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L127">                        }</span>
+                    }
+<span class="fc" id="L129">                }</span>
+            }
+
+<span class="pc bpc" id="L132" title="6 of 8 branches missed.">        }catch (SQLException ex) {</span>
+<span class="nc" id="L133">            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L134">            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L135">        }</span>
+<span class="fc" id="L136">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

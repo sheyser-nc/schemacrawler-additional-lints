@@ -1,0 +1,22 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.utils,XmlUtils,7,37,0,2,2,11,1,2,1,1
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.utils,JSonUtils,7,19,0,2,2,7,1,2,1,1
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.utils,XmlUtils.SimpleErrorHandler,2,4,0,0,2,2,2,2,2,2
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.utils,LintUtils,9,121,3,59,2,8,4,34,1,6
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterForbiddenPrimaryKeyType,43,11,6,0,10,4,6,2,3,2
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterJsonContent,84,161,15,15,4,36,11,10,0,6
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterXmlContent,126,290,24,22,6,56,18,12,0,7
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterJsonTypeColumn,14,88,2,8,4,21,3,8,1,5
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterBlobTypeColumn,0,51,0,4,0,13,0,7,0,5
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterForeignKeyName,20,121,7,13,4,25,9,8,2,5
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterNoSpaceInNames,0,56,1,5,0,14,1,6,0,4
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterColumnContentNotNormalized,84,258,13,15,4,44,9,12,0,7
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterColumnSize,86,165,14,14,4,32,10,10,0,6
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterCompressBlob,131,257,23,17,8,52,19,8,2,5
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterPrimaryKeyNotIntegerLikeType,0,64,0,10,0,15,0,10,0,5
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterTableNameNotInLowerCase,0,92,0,8,0,22,0,11,0,7
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterPluralTableName,0,28,0,2,0,9,0,5,0,4
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterBooleanContent,168,286,33,27,8,64,25,13,0,8
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterByteaTypeColumn,75,11,8,0,14,4,7,2,3,2
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterOrphanTable,0,31,0,4,0,9,0,6,0,4
+Additional SchemaCrawler Lints,io.github.mbarre.schemacrawler.tool.linter,LinterForeignKeyMismatchLazy,4,91,3,9,2,19,5,6,2,3

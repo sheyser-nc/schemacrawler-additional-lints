@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterJsonTypeColumn.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterJsonTypeColumn.java</span></div><h1>LinterJsonTypeColumn.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import static java.util.Objects.requireNonNull;
+
+/**
+ * Linter to check if JSON type is used instead of JSONB - PostgreSQL reserved lint
+ * @author mbarre
+ * @since 1.0.1
+ */
+public class LinterJsonTypeColumn extends BaseLinter {
+<span class="fc" id="L46">    private static final Logger LOGGER = Logger.getLogger(LinterJsonTypeColumn.class.getName());</span>
+    
+    /**
+     * The lint that test if the proper jsonb type has been used.
+     *
+     */
+<span class="fc" id="L52">    public LinterJsonTypeColumn() {</span>
+<span class="fc" id="L53">        setSeverity(LintSeverity.high);</span>
+<span class="fc" id="L54">    }</span>
+    
+    /**
+     * Get the description
+     * @return the description
+     */
+    @Override
+    public String getDescription()
+    {
+<span class="fc" id="L63">        return &quot;\&quot;JSONB\&quot; type should be used instead of \&quot;JSON\&quot; to store JSON data&quot;;</span>
+    }
+    
+    /**
+     * Get the summaru
+     * @return the summaru
+     */
+    @Override
+    public String getSummary()
+    {
+<span class="nc" id="L73">        return &quot;\&quot;JSONB\&quot; type should be used instead of \&quot;JSON\&quot;&quot;;</span>
+    }
+    
+    /**
+     * The lint that does the job
+     * @param table table
+     * @param connection connection
+     */
+    @Override
+    protected void lint(final Table table, Connection connection) throws SchemaCrawlerException
+    {
+<span class="fc" id="L84">        requireNonNull(table, &quot;No table provided&quot;);</span>
+        
+        try {
+<span class="pc bpc" id="L87" title="1 of 2 branches missed.">            if(&quot;PostgreSQL&quot;.equalsIgnoreCase(connection.getMetaData().getDatabaseProductName()) &amp;&amp;</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">                    &quot;9.4&quot;.compareTo(connection.getMetaData().getDatabaseProductVersion()) &lt;= 0){</span>
+<span class="fc" id="L89">                List&lt;String&gt; names = findJsonTypeColumn(getColumns(table));</span>
+<span class="fc bfc" id="L90" title="All 2 branches covered.">                for (String name : names) {</span>
+<span class="fc" id="L91">                    addLint(table, getDescription(), name);</span>
+<span class="fc" id="L92">                }</span>
+            }
+            
+<span class="nc" id="L95">        } catch (SQLException e) {</span>
+<span class="nc" id="L96">            LOGGER.log(Level.SEVERE, &quot;Unable to get database product name info. Lint will not be executed.&quot;);</span>
+<span class="nc" id="L97">            throw new SchemaCrawlerException(e.getMessage(), e);</span>
+<span class="fc" id="L98">        }</span>
+<span class="fc" id="L99">    }</span>
+    
+    private List&lt;String&gt; findJsonTypeColumn(List&lt;Column&gt; columns){
+<span class="fc" id="L102">        List&lt;String&gt; names = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L103" title="All 2 branches covered.">        for (Column column : columns) {</span>
+<span class="fc" id="L104">            LOGGER.log(Level.INFO, &quot;Checking {0}...&quot;, column.getFullName());</span>
+<span class="fc bfc" id="L105" title="All 2 branches covered.">            if(&quot;json&quot;.equalsIgnoreCase(column.getColumnDataType().getDatabaseSpecificTypeName())){</span>
+<span class="fc" id="L106">                names.add(column.getName());</span>
+            }
+<span class="fc" id="L108">        }</span>
+<span class="fc" id="L109">        return names;</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

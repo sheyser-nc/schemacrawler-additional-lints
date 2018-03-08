@@ -51,7 +51,7 @@
 <a class="jxr_linenumber" name="L43" href="#L43">43</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/tool/linter/LinterColumnContentNotNormalizedTest.html">LinterColumnContentNotNormalizedTest</a>  <strong class="jxr_keyword">extends</strong> BaseLintTest {
 <a class="jxr_linenumber" name="L44" href="#L44">44</a>  
 <a class="jxr_linenumber" name="L45" href="#L45">45</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <a href="../../../../../../io/github/mbarre/schemacrawler/test/utils/PostgreSqlDatabase.html">PostgreSqlDatabase</a> database;
-<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHANGE_LOG_NORMALIZE_CHECK = <span class="jxr_string">"src/test/db/liquibase/normalizeCheck/db.changelog.xml"</span>;
+<a class="jxr_linenumber" name="L46" href="#L46">46</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> String CHANGE_LOG_NORMALIZE_CHECK = <span class="jxr_string">"src/test/db/liquibase/LinterColumnContentNotNormalized/db.changelog.xml"</span>;
 <a class="jxr_linenumber" name="L47" href="#L47">47</a>  
 <a class="jxr_linenumber" name="L48" href="#L48">48</a>  
 <a class="jxr_linenumber" name="L49" href="#L49">49</a>      @BeforeClass
@@ -76,7 +76,7 @@
 <a class="jxr_linenumber" name="L68" href="#L68">68</a>          Connection connection = DriverManager.getConnection(PostgreSqlDatabase.CONNECTION_STRING,
 <a class="jxr_linenumber" name="L69" href="#L69">69</a>                  PostgreSqlDatabase.USER_NAME, database.getPostgresPassword());
 <a class="jxr_linenumber" name="L70" href="#L70">70</a>  
-<a class="jxr_linenumber" name="L71" href="#L71">71</a>          List&lt;LintWrapper&gt; lints = executeToJsonAndConvertToLintList(options, connection);
+<a class="jxr_linenumber" name="L71" href="#L71">71</a>          List&lt;LintWrapper&gt; lints = executeToJsonAndConvertToLintList(LinterColumnContentNotNormalized.<strong class="jxr_keyword">class</strong>.getSimpleName(), options, connection);
 <a class="jxr_linenumber" name="L72" href="#L72">72</a>  
 <a class="jxr_linenumber" name="L73" href="#L73">73</a>          <em class="jxr_comment">// now we have the json array, let's filter only the one we want in our lint</em>
 <a class="jxr_linenumber" name="L74" href="#L74">74</a>          <em class="jxr_comment">// lint id : [io.github.mbarre.schemacrawler.tool.linter.LinterColumnContentNotNormalized]</em>
@@ -127,6 +127,6 @@
 <a class="jxr_linenumber" name="L119" href="#L119">119</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2015&#x2013;2017 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2015&#x2013;2018 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
 </body>
 </html>

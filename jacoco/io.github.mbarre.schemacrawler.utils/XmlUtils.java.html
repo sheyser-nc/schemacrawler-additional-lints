@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>XmlUtils.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.utils</a> &gt; <span class="el_source">XmlUtils.java</span></div><h1>XmlUtils.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.utils;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import org.slf4j.LoggerFactory;
+import org.xml.sax.ErrorHandler;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.StringReader;
+
+/**
+ *
+ * @author salad74
+ */
+public class XmlUtils {
+
+<span class="nc" id="L43">    private XmlUtils(){</span>
+<span class="nc" id="L44">        throw new IllegalAccessError(&quot;Utility class.&quot;);</span>
+    }
+    
+    /**
+     * Tells wether a column contens XML data or not.
+     * @param data the string to test
+     * @return if the string is a valid xml (or not)
+     */
+    public static final boolean isXmlContent(String data) {
+        
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if(data == null)</span>
+<span class="fc" id="L55">            return false;</span>
+        
+        DocumentBuilder db;
+        try {
+            
+<span class="fc" id="L60">            db = DocumentBuilderFactory.newInstance().newDocumentBuilder();</span>
+<span class="fc" id="L61">            db.setErrorHandler(new SimpleErrorHandler());</span>
+            
+<span class="fc" id="L63">            InputSource is = new InputSource();</span>
+<span class="fc" id="L64">            is.setCharacterStream(new StringReader(data));</span>
+<span class="fc" id="L65">            db.parse(is);</span>
+            
+<span class="fc" id="L67">            return true;</span>
+            
+<span class="fc" id="L69">        } catch (SAXException | IOException  | ParserConfigurationException e) {</span>
+<span class="fc" id="L70">            LoggerFactory.getLogger(XmlUtils.class).info(&quot;String is not XML.&quot;, e);</span>
+<span class="fc" id="L71">            return false;</span>
+        }
+    }
+    
+    
+<span class="fc" id="L76">    private static class SimpleErrorHandler implements ErrorHandler {</span>
+        @Override
+        public void warning(SAXParseException e) throws SAXException {
+            // Do nothing
+<span class="nc" id="L80">        }</span>
+        
+        @Override
+        public void error(SAXParseException e) throws SAXException {
+            // Do nothing
+<span class="nc" id="L85">        }</span>
+        
+        @Override
+        public void fatalError(SAXParseException e) throws SAXException {
+            // Do nothing
+<span class="fc" id="L90">        }</span>
+    }
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

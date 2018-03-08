@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LinterColumnContentNotNormalized.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Additional SchemaCrawler Lints</a> &gt; <a href="index.source.html" class="el_package">io.github.mbarre.schemacrawler.tool.linter</a> &gt; <span class="el_source">LinterColumnContentNotNormalized.java</span></div><h1>LinterColumnContentNotNormalized.java</h1><pre class="source lang-java linenums">package io.github.mbarre.schemacrawler.tool.linter;
+
+/*
+ * #%L
+ * Additional SchemaCrawler Lints
+ * %%
+ * Copyright (C) 2015 - 2016 github
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public
+ * License along with this program.  If not, see
+ * &lt;http://www.gnu.org/licenses/gpl-3.0.html&gt;.
+ * #L%
+ */
+
+import io.github.mbarre.schemacrawler.utils.LintUtils;
+import schemacrawler.schema.Column;
+import schemacrawler.schema.Table;
+import schemacrawler.schemacrawler.Config;
+import schemacrawler.schemacrawler.SchemaCrawlerException;
+import schemacrawler.tools.lint.BaseLinter;
+import schemacrawler.tools.lint.LintSeverity;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+/**
+ * Test column contents normalization. Detect wether foreign table should have
+ * be used.
+ * @author salad74
+ */
+public class LinterColumnContentNotNormalized extends BaseLinter {
+    
+<span class="fc" id="L48">    private static final Logger LOGGER = Logger.getLogger(LinterColumnContentNotNormalized.class.getName());</span>
+    private static final String NB_REPEAT_TOLERANCE_CONFIG = &quot;nbRepeatTolerance&quot;;
+    private static final String MIN_TEXT_COLUMN_SIZE_CONFIG = &quot;minTextColumnSize&quot;;
+    
+    /**
+     * Repeat tolerance : 1 is the most agressive, duplicates occur since there
+     * are at least tow reps of the same value.
+     */
+    public static final int NB_REPEAT_TOLERANCE = 2;
+    
+    /**
+     * The minimal length of the text based column. We consider that a 1-length
+     * char based column is acceptable.
+     */
+    public static final int MIN_TEXT_COLUMN_SIZE = 2;
+    
+    private int nbRepeatTolerance;
+    private int minTextColumnSize;
+    
+    
+    /**
+     * Build the lint
+     */
+<span class="fc" id="L71">    public LinterColumnContentNotNormalized() {</span>
+<span class="fc" id="L72">        setSeverity(LintSeverity.medium);</span>
+<span class="fc" id="L73">        nbRepeatTolerance = NB_REPEAT_TOLERANCE;</span>
+<span class="fc" id="L74">        minTextColumnSize = MIN_TEXT_COLUMN_SIZE;</span>
+<span class="fc" id="L75">    }</span>
+    
+    /**
+     * Get the lint descrption
+     * @return The Lint description
+     */
+    @Override
+    public String getDescription() {
+<span class="fc" id="L83">        return getSummary();</span>
+    }
+    
+    /**
+     * Get the Summary
+     * @return The lint summary
+     */
+    @Override
+    public String getSummary() {
+<span class="fc" id="L92">        return &quot;too much duplicates&quot;;</span>
+    }
+
+    @Override
+    public void configure(Config config) {
+<span class="fc" id="L97">        nbRepeatTolerance = config.getIntegerValue(NB_REPEAT_TOLERANCE_CONFIG, NB_REPEAT_TOLERANCE);</span>
+<span class="fc" id="L98">        minTextColumnSize = config.getIntegerValue(MIN_TEXT_COLUMN_SIZE_CONFIG, MIN_TEXT_COLUMN_SIZE);</span>
+<span class="fc" id="L99">    }</span>
+        
+    /**
+     * Tells wether a column is text based or not... and if minimal length
+     * requirements are met to make normalization computations.
+     *
+     * @param javaSqlType javaSqlType
+     * @param colSize colSize
+     * @param minColumnSize minColSize
+     * @return mustColumnBeTested
+     */
+    public static final boolean mustColumnBeTested(int javaSqlType, int colSize, int minColumnSize) {
+<span class="fc bfc" id="L111" title="All 2 branches covered.">        if (LintUtils.isSqlTypeTextBased(javaSqlType)) {</span>
+            // test minimal size to pass test
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if(colSize &gt; minColumnSize){</span>
+<span class="fc" id="L114">                LOGGER.log(Level.INFO, &quot;Column min size requirement are met : &lt;{0}&gt; is greater than &lt;{1}&gt;&quot;, new Object[]{colSize, minColumnSize});</span>
+<span class="fc" id="L115">                return true;</span>
+            }
+            else{
+<span class="fc" id="L118">                return false;</span>
+            }
+        } else {
+<span class="fc" id="L121">            return false;</span>
+        }
+    }
+    
+    /**
+     * The lint that does the job
+     * @param table table
+     * @param connection the db connection
+     * @throws SchemaCrawlerException SchemaCrawlerException
+     */
+    @Override
+    protected void lint(final Table table, final Connection connection)
+            throws SchemaCrawlerException {
+        
+<span class="fc" id="L135">        LOGGER.log(Level.CONFIG, &quot;&lt;nbRepeatTolerance&gt; parameter set to {0}&quot;,nbRepeatTolerance);</span>
+<span class="fc" id="L136">        LOGGER.log(Level.CONFIG, &quot;&lt;minTextColumnSize&gt; parameter set to {0}&quot;,minTextColumnSize);</span>
+        
+<span class="pc" id="L138">        try (Statement stmt = connection.createStatement()){</span>
+            String sql;
+<span class="fc" id="L140">            String tableName = table.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L141">            List&lt;Column&gt; columns = getColumns(table);</span>
+            
+<span class="fc bfc" id="L143" title="All 2 branches covered.">            for (Column column : columns) {</span>
+<span class="fc bfc" id="L144" title="All 2 branches covered.">                if (LinterColumnContentNotNormalized.mustColumnBeTested(column.getColumnDataType().getJavaSqlType().getJavaSqlType(), column.getSize(), minTextColumnSize)) {</span>
+                    // test based column, perform test
+<span class="fc" id="L146">                    LOGGER.log(Level.INFO, &quot;Checking {0}...&quot;, column.getFullName());</span>
+<span class="fc" id="L147">                    String columnName = column.getName().replaceAll(&quot;\&quot;&quot;, &quot;&quot;);</span>
+<span class="fc" id="L148">                    sql = &quot;select \&quot;&quot; + columnName + &quot;\&quot;, count(*)  as counter from \&quot;&quot; + tableName + &quot;\&quot; where \&quot;&quot; + columnName + &quot;\&quot; is not null group by \&quot;&quot; + columnName + &quot;\&quot; having count(*) &gt; &quot; + nbRepeatTolerance + &quot; order by count(*) desc&quot;;</span>
+<span class="fc" id="L149">                    LOGGER.log(Level.CONFIG, &quot;SQL : {0}&quot;, sql);</span>
+                    
+<span class="pc" id="L151">                    try(ResultSet rs = stmt.executeQuery(sql)){</span>
+<span class="fc bfc" id="L152" title="All 2 branches covered.">                        while (rs.next()) {</span>
+<span class="fc" id="L153">                            int nbRepeats = rs.getInt(&quot;counter&quot;);</span>
+<span class="fc" id="L154">                            LOGGER.log(Level.CONFIG, &quot;Found &lt;{0}&gt; repetitions of the same value &lt;{1}&gt; in &lt;{2}&gt;&quot;, new Object[]{nbRepeats, rs.getString(1), column});</span>
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">                            if(nbRepeats &gt; nbRepeatTolerance){</span>
+<span class="fc" id="L156">                                LOGGER.log(Level.CONFIG, &quot;Adding lint as nbRepeats exceeds tolerance ({0} &gt; {1} )&quot;, new Object[]{nbRepeats, nbRepeatTolerance});</span>
+<span class="fc" id="L157">                                addLint(table, &quot;&lt;&quot; + nbRepeats + &quot;&gt; repetitions of the same value &lt;&quot; + rs.getString(1) + &quot;&gt;&quot;, column.getFullName());</span>
+                            }
+<span class="fc" id="L159">                        }</span>
+<span class="pc bpc" id="L160" title="6 of 8 branches missed.">                    } catch (SQLException ex) {</span>
+<span class="nc" id="L161">                        LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L162">                        throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L163">                    }</span>
+<span class="fc" id="L164">                } else {</span>
+                    // no text based column, skip test
+<span class="fc" id="L166">                    LOGGER.log(Level.CONFIG, &quot;&lt;{0}&gt; is not text based : normalize test will be skipped.&quot;, column);</span>
+                }
+                
+<span class="fc" id="L169">            }</span>
+<span class="pc bpc" id="L170" title="6 of 8 branches missed.">        } catch (SQLException ex) {</span>
+<span class="nc" id="L171">            LOGGER.severe(ex.getMessage());</span>
+<span class="nc" id="L172">            throw new SchemaCrawlerException(ex.getMessage(), ex);</span>
+<span class="fc" id="L173">        }</span>
+        
+<span class="fc" id="L175">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.7.9.201702052155</span></div></body></html>

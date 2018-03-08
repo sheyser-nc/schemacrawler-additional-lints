@@ -64,11 +64,11 @@
 <a class="jxr_linenumber" name="L56" href="#L56">56</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">static</strong> <strong class="jxr_keyword">final</strong> Logger LOGGER = Logger.getLogger(BaseLintTest.<strong class="jxr_keyword">class</strong>.getName());
 <a class="jxr_linenumber" name="L57" href="#L57">57</a>  
 <a class="jxr_linenumber" name="L58" href="#L58">58</a>  
-<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">protected</strong> List&lt;LintWrapper&gt; executeToJsonAndConvertToLintList(SchemaCrawlerOptions options, Connection connection)  <strong class="jxr_keyword">throws</strong> Exception{
+<a class="jxr_linenumber" name="L59" href="#L59">59</a>      <strong class="jxr_keyword">protected</strong> List&lt;LintWrapper&gt; executeToJsonAndConvertToLintList(String linterName, SchemaCrawlerOptions options, Connection connection)  <strong class="jxr_keyword">throws</strong> Exception{
 <a class="jxr_linenumber" name="L60" href="#L60">60</a>  
 <a class="jxr_linenumber" name="L61" href="#L61">61</a>          <strong class="jxr_keyword">final</strong> Executable executable = <strong class="jxr_keyword">new</strong> SchemaCrawlerExecutable(<span class="jxr_string">"lint"</span>);
 <a class="jxr_linenumber" name="L62" href="#L62">62</a>  
-<a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">final</strong> Path linterConfigsFile = FileSystems.getDefault().getPath(<span class="jxr_string">""</span>, <strong class="jxr_keyword">this</strong>.getClass().getClassLoader().getResource(<span class="jxr_string">"schemacrawler-linter-configs-test.xml"</span>).getPath());
+<a class="jxr_linenumber" name="L63" href="#L63">63</a>          <strong class="jxr_keyword">final</strong> Path linterConfigsFile = FileSystems.getDefault().getPath(<span class="jxr_string">""</span>, <strong class="jxr_keyword">this</strong>.getClass().getClassLoader().getResource(linterName + <span class="jxr_string">"/schemacrawler-linter-configs-test.xml"</span>).getPath());
 <a class="jxr_linenumber" name="L64" href="#L64">64</a>          <strong class="jxr_keyword">final</strong> LintOptionsBuilder optionsBuilder = <strong class="jxr_keyword">new</strong> LintOptionsBuilder();
 <a class="jxr_linenumber" name="L65" href="#L65">65</a>          optionsBuilder.withLinterConfigs(linterConfigsFile.toString());
 <a class="jxr_linenumber" name="L66" href="#L66">66</a>          executable.setAdditionalConfiguration(optionsBuilder.toConfig());
@@ -148,6 +148,6 @@
 <a class="jxr_linenumber" name="L140" href="#L140">140</a> }
 </pre>
 <hr/>
-<div id="footer">Copyright &#169; 2015&#x2013;2017 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
+<div id="footer">Copyright &#169; 2015&#x2013;2018 <a href="https://github.com/mbarre/schemacrawler-additional-lints">github</a>. All rights reserved.</div>
 </body>
 </html>
