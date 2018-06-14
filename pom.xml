@@ -156,7 +156,7 @@ License along with this program.  If not, see
 		<versioneye-maven-plugin.apikey>${env.VERSIONEYE_APIKEY}</versioneye-maven-plugin.apikey>
 		<versioneye-maven-plugin.projectid>${env.VERSIONEYE_PROJECTID}</versioneye-maven-plugin.projectid>
 		<checksum-maven-plugin.version>1.4</checksum-maven-plugin.version>
-		<license-maven-plugin.version>1.14</license-maven-plugin.version>
+		<license-maven-plugin.version>1.16</license-maven-plugin.version>
 		<commons-rng-simple.version>1.0</commons-rng-simple.version>
 	</properties>
 
